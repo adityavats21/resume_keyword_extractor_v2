@@ -1,192 +1,170 @@
-ResumeAI – AI Resume Keyword Extractor (TF-IDF + WordCloud + Charts)
+#  Resume Keyword Extractor (AI Powered)
 
- An AI-powered resume analysis tool that extracts keyword insights and generates visual analytics.
+A full-stack AI application that extracts meaningful **keywords**, **TF-IDF scores**, and generates **Wordcloud**, **Bar Chart**, and **Radar Chart** visualizations from any uploaded resume.
 
- Overview
+This project uses **NLP + TF-IDF**, **Python (Flask)**, **React.js**, and **TailwindCSS**, and is fully deployable.
 
-ResumeAI is a full-stack AI project that analyzes a resume PDF using Natural Language Processing (NLP) and generates:
+---
 
- Top TF-IDF keywords
+##  Features
 
- Modern Word Cloud
+###  AI/NLP Features
+- Extracts clean text from PDF resumes  
+- Cleans text using **NLP preprocessing**  
+- Computes **TF-IDF scores** for keyword ranking  
+- Generates:
+  - Word Cloud  
+  - Bar Chart (modern stylized)  
+  - Radar Chart for keyword strength  
 
- Enhanced Bar Chart
+###  Full-Stack Features
+- React.js modern UI with TailwindCSS + animations  
+- Multi-page app with:
+  - Home Page
+  - Results Dashboard
+  - About
+  - Contact  
+- Flask backend with CORS  
+- Image generation using Matplotlib & WordCloud  
+- Fully deployable
 
- Radar Chart for Keyword Strength
+---
 
- Modern React Frontend (TailwindCSS, Animations)
+##  Tech Stack Used
 
- Python Flask Backend with NLP + TF-IDF
+### **Frontend**
+- React.js (Create React App)
+- React Router
+- TailwindCSS
+- Modern UI/UX with gradients, glassmorphism, and animations
 
-This tool helps students & professionals understand how well their resume highlights important skills.
+### **Backend**
+- Python
+- Flask
+- Flask-CORS
+- scikit-learn (TF-IDF)
+- NLTK
+- PyPDF2
+- Matplotlib
+- WordCloud library
 
- How the AI Works (Simple Explanation)
+### **AI Working**
+The intelligence comes from:
+1. **TF-IDF (Term Frequency – Inverse Document Frequency)**  
+   - Measures how important a word is in the resume  
+   - Higher TF-IDF → more unique, meaningful keyword  
+2. **NLP Cleaning**
+   - Removes stopwords  
+   - Normalizes text  
+   - Tokenizes and processes words  
+3. **Visualization Layer**
+   - WordCloud shows prominence  
+   - Bar Chart shows ranked score  
+   - Radar Chart shows keyword strength distribution  
 
-The AI logic is implemented in Python (Flask) using NLP techniques:
+---
 
-1️ PDF Text Extraction
-
-Using PyPDF2, the text is extracted from the uploaded PDF.
-
-️ Text Cleaning
-
-Converting to lowercase
-
-Removing punctuation
-
-Removing stopwords (the, is, and)
-
-Tokenizing
-
-Lemmatization (root forms)
-
- TF-IDF Calculation (Core AI Part)
-
-We use TfidfVectorizer from scikit-learn:
-
-TF = how frequently a word appears
-
-IDF = how unique/important a word is
-
-TF-IDF = TF × IDF → importance score
-
- The AI selects top 10 most important keywords from the resume.
-
- Modern Data Visualizations
-
-Word Cloud generated using WordCloud
-
-Bar chart generated using matplotlib
-
-Radar Chart giving visual strength distribution
-
-These visuals are automatically saved & returned to frontend.
-
- Tech Stack
- Frontend (React + TailwindCSS)
-
-React.js
-
-React Router
-
-Tailwind CSS
-
-Advanced UI with blur, glassmorphism, animations
-
- Backend (Flask + Python NLP)
-
-Flask REST API
-
-PDF text extraction (PyPDF2)
-
-NLP cleaning (NLTK)
-
-TF-IDF keyword ranking (scikit-learn)
-
-WordCloud + Matplotlib visualizations
-
- AI / ML
-
-NLP preprocessing
-
-TF-IDF vectorizer
-
-Keyword importance scoring
-
-Visualization analytics
-
- Project Structure
+##  Project Structure
 resume_keyword_extractor/
-│
-├── frontend/                    # React app
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── context/
-│   │   ├── App.jsx
-│   │   └── index.js
-│   └── package.json
-│
-├── src/                        # Backend source
-│   ├── pdf_reader.py
-│   ├── text_cleaner.py
-│   ├── tfidf_extractor.py
-│   └── visualizer.py
-│
-├── venv/                       # Python virtual environment
-├── main.py                     # Flask backend
-├── requirements.txt
-└── README.md
+│── frontend/ # React UI
+│── src/
+│ ├── pdf_reader.py
+│ ├── text_cleaner.py
+│ ├── tfidf_extractor.py
+│ ├── visualizer.py
+│── main.py # Flask backend
+│── uploaded.pdf
+│── wordcloud.png
+│── bar_chart.png
+│── radar_chart.png
+│── README.md
 
- How to Run the Project
- Backend Setup
+
+---
+
+## Local Setup Instructions
+
+###  1. Backend Setup (Flask)
+
+```sh
 cd resume_keyword_extractor
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python main.py
-
-
-Backend runs on:
+```
+Backend runs at:
 
 http://127.0.0.1:5000
 
- Frontend Setup
+ 2. Frontend Setup (React)
 cd frontend
 npm install
 npm start
 
 
-Frontend runs on:
+Frontend runs at:
 
 http://localhost:3000
+ Deployment Guide
+ Deploy Backend (Flask) — Render
 
- Features Preview
- Keyword Extraction
+Go to https://render.com
 
-Shows top keywords with TF-IDF score.
+Click New Web Service
 
- Modern Word Cloud
+Connect your GitHub repository
 
-Visual distribution of important skills and terms.
+Select your repo
 
- Bar Chart
+Configure:
 
-Enhanced gradient-style bar chart for keyword importance.
+Build Command: pip install -r requirements.txt
+Start Command: python main.py
 
- Radar Chart
 
-Unique modern visualization to compare keyword strength.
+Set Runtime to Python 3
 
- Clean Dashboard UI
+Deploy
 
-Glassmorphism, animations, and modern layout.
+After deployment, Render gives you a backend URL like:
 
- Why This Project is Useful?
+https://resume-ai-backend.onrender.com
 
-Helps improve resume keyword density
 
-Shows skill representation clearly
+ Replace your frontend fetch URL:
 
-Useful for ATS optimization
+fetch("https://your-backend-url/extract")
 
-Great portfolio project for ML + Web Dev
+ Deploy Frontend (React) — Vercel
 
-Includes both AI + Full-Stack exposure
+Go to https://vercel.com
 
- Deployment Options
+Import your GitHub repository
 
-Backend → Render / Railway
+Select frontend folder (monorepo support)
 
-Frontend → Vercel / Netlify
+Set:
 
-Assets → Served directly from Flask
+Build Command: npm run build
+Output Folder: build
 
- License
 
-MIT License — Free to use, modify, and distribute.
+Click Deploy
+
+Frontend will deploy to:
+
+https://resume-ai.vercel.app
+
+ Environment Notes
+
+Update backend URL in React before deploying:
+
+const backendURL = "https://your-render-backend-url/extract";
 
  Author
 
 Aditya Vats
-B.Tech CSE | AI & Web Developer
-GitHub: adityavats21
+Modern AI + Full-Stack Developer 🚀
+
+
