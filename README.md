@@ -1,170 +1,90 @@
-#  Resume Keyword Extractor (AI Powered)
+# Resume–JD Keyword Matcher 📄
 
-A full-stack AI application that extracts meaningful **keywords**, **TF-IDF scores**, and generates **Wordcloud**, **Bar Chart**, and **Radar Chart** visualizations from any uploaded resume.
-
-This project uses **NLP + TF-IDF**, **Python (Flask)**, **React.js**, and **TailwindCSS**, and is fully deployable.
+An NLP-powered tool that extracts keywords from uploaded resumes using TF-IDF scoring and generates match analysis visualizations — built as a full-stack Flask + React application.
 
 ---
 
-##  Features
+## What It Does
 
-###  AI/NLP Features
-- Extracts clean text from PDF resumes  
-- Cleans text using **NLP preprocessing**  
-- Computes **TF-IDF scores** for keyword ranking  
-- Generates:
-  - Word Cloud  
-  - Bar Chart (modern stylized)  
-  - Radar Chart for keyword strength  
-
-###  Full-Stack Features
-- React.js modern UI with TailwindCSS + animations  
-- Multi-page app with:
-  - Home Page
-  - Results Dashboard
-  - About
-  - Contact  
-- Flask backend with CORS  
-- Image generation using Matplotlib & WordCloud  
-- Fully deployable
+Upload a resume PDF → the system:
+1. Extracts and cleans text using NLP preprocessing (tokenization, stopword removal)
+2. Scores keywords using **TF-IDF** (Term Frequency–Inverse Document Frequency)
+3. Generates three visualizations: **Word Cloud**, **Bar Chart** (ranked scores), **Radar Chart** (keyword strength distribution)
+4. Serves results through a React dashboard with real-time rendering
 
 ---
 
-##  Tech Stack Used
+## Tech Stack
 
-### **Frontend**
-- React.js (Create React App)
-- React Router
-- TailwindCSS
-- Modern UI/UX with gradients, glassmorphism, and animations
-
-### **Backend**
-- Python
-- Flask
-- Flask-CORS
-- scikit-learn (TF-IDF)
-- NLTK
-- PyPDF2
-- Matplotlib
-- WordCloud library
-
-### **AI Working**
-The intelligence comes from:
-1. **TF-IDF (Term Frequency – Inverse Document Frequency)**  
-   - Measures how important a word is in the resume  
-   - Higher TF-IDF → more unique, meaningful keyword  
-2. **NLP Cleaning**
-   - Removes stopwords  
-   - Normalizes text  
-   - Tokenizes and processes words  
-3. **Visualization Layer**
-   - WordCloud shows prominence  
-   - Bar Chart shows ranked score  
-   - Radar Chart shows keyword strength distribution  
+| Layer | Tools |
+|---|---|
+| NLP / ML | scikit-learn (TF-IDF), NLTK, PyPDF2 |
+| Visualization | Matplotlib, WordCloud |
+| Backend | Python, Flask, Flask-CORS |
+| Frontend | React.js, TailwindCSS, React Router |
+| Deployment | Render (backend), Vercel (frontend) |
 
 ---
 
-##  Project Structure
-resume_keyword_extractor/
-│── frontend/ # React UI
-│── src/
-│ ├── pdf_reader.py
-│ ├── text_cleaner.py
-│ ├── tfidf_extractor.py
-│ ├── visualizer.py
-│── main.py # Flask backend
-│── uploaded.pdf
-│── wordcloud.png
-│── bar_chart.png
-│── radar_chart.png
-│── README.md
+## How TF-IDF Works Here
 
+**TF (Term Frequency)** — how often a word appears in the resume.
+**IDF (Inverse Document Frequency)** — penalizes common words, rewards unique ones.
+
+A high TF-IDF score = the word is both frequent *and* distinctive to this resume — which are your strongest keywords for a given JD.
+
+```
+TF-IDF(word) = TF(word) × log(N / df(word))
+```
 
 ---
 
-## Local Setup Instructions
+## Project Structure
 
-###  1. Backend Setup (Flask)
+```
+resume_keyword_extractor_v2/
+├── main.py                 # Flask entry point
+├── requirements.txt
+├── src/
+│   ├── pdf_reader.py       # PDF text extraction
+│   ├── text_cleaner.py     # NLP preprocessing
+│   ├── tfidf_extractor.py  # TF-IDF scoring
+│   └── visualizer.py       # Chart generation
+└── frontend/               # React + Tailwind UI
+    └── src/
+        └── pages/          # Home, Results, About, Contact
+```
 
-```sh
-cd resume_keyword_extractor
+---
+
+## Local Setup
+
+### Backend
+
+```bash
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
-Backend runs at:
 
-http://127.0.0.1:5000
+Runs at `http://127.0.0.1:5000`
 
- 2. Frontend Setup (React)
+### Frontend
+
+```bash
 cd frontend
 npm install
 npm start
+```
 
+Runs at `http://localhost:3000`
 
-Frontend runs at:
+> Before deploying, update the backend URL in your React fetch calls to point to your Render deployment URL.
 
-http://localhost:3000
- Deployment Guide
- Deploy Backend (Flask) — Render
+---
 
-Go to https://render.com
+## Author
 
-Click New Web Service
-
-Connect your GitHub repository
-
-Select your repo
-
-Configure:
-
-Build Command: pip install -r requirements.txt
-Start Command: python main.py
-
-
-Set Runtime to Python 3
-
-Deploy
-
-After deployment, Render gives you a backend URL like:
-
-https://resume-ai-backend.onrender.com
-
-
- Replace your frontend fetch URL:
-
-fetch("https://your-backend-url/extract")
-
- Deploy Frontend (React) — Vercel
-
-Go to https://vercel.com
-
-Import your GitHub repository
-
-Select frontend folder (monorepo support)
-
-Set:
-
-Build Command: npm run build
-Output Folder: build
-
-
-Click Deploy
-
-Frontend will deploy to:
-
-https://resume-ai.vercel.app
-
- Environment Notes
-
-Update backend URL in React before deploying:
-
-const backendURL = "https://your-render-backend-url/extract";
-
- Author
-
-Aditya Vats
-Modern AI + Full-Stack Developer 🚀
-
-
+**Aditya Vats**
+[GitHub](https://github.com/adityavats21) · [LinkedIn](https://linkedin.com/in/adityavats21)
